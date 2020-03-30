@@ -15,7 +15,7 @@
                     </ul>
                 </div>
                 <div class="match-list">
-                    <searchItem :cellData = historykwList iconType="history"></searchItem>
+                    <searchItem :cellData = historykwList iconType="history" iconFtType="close"></searchItem>
                 </div>
                 <!-- 搜索历史 -->
                 <div class="search-pannel-history">
