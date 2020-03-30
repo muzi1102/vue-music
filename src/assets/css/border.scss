@@ -1,0 +1,59 @@
+@mixin border-bottom($color) {
+    position: relative;
+    &::after {
+        position: absolute;
+        content: '';
+        width: 100%;
+        left: 0;
+        bottom: 0;
+        height: 0.02rem;
+        background-color: $color;
+        transform: scale(1,.5);
+        transform-origin: center bottom
+    }
+}
+
+@mixin border-top($color) {
+    position: relative;
+    &::before {
+        position: absolute;
+        content: '';
+        width: 100%;
+        left: 0;
+        top: 0;
+        height: 0.02rem;
+        background-color: $color;
+        transform: scale(1,.5);
+        transform-origin: center top
+    }
+}
+
+@mixin border-left($color) {
+    position: relative;
+    &::before {
+        position: absolute;
+        content: '';
+        left: 0;
+        top: 0;
+        width: 0.02rem;
+        height: 100%;
+        background-color: $color;
+        transform: scale(0.5,1);
+        transform-origin: center top
+    }
+}
+
+@mixin border($color, $radius) {
+    position: relative;
+    &::before {
+        position: absolute;
+        top: -50%;
+        bottom: -50%;
+        left: -50%;
+        right: -50%;
+        content: '';
+        transform: scale(0.5);
+        border: 0.02rem solid $color;
+        border-radius: $radius
+    }
+}

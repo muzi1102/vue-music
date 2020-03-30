@@ -4,6 +4,17 @@
 
 ## Build Setup
 
+## 遇到的q:
+    (1)webpack-dev-server 代理配置重启
+    
+    (2)node-sass版本
+
+    (3)1px的问题
+
+    (4)请求content-type
+
+    (5)axios请求的封装
+
 ``` bash
 # install dependencies
 npm install
