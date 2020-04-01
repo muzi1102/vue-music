@@ -16,5 +16,10 @@ export default {
         height: 0.8rem;
         background-color: #d44439;
         color: #fff;
+        position: fixed;
+        left: 0;
+        right: 0;
+        top: 0;
+        z-index: 100;
     }
 </style>

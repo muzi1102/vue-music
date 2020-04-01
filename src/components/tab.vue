@@ -33,6 +33,11 @@ export default {
         justify-content: center;
         align-items: center;
         border-bottom: 1px solid  #eeeeee;
+        position: fixed;
+        top: 0.8rem;
+        left: 0;
+        right: 0;
+        z-index: 100;
         
         /* &-item{
             flex: 1;

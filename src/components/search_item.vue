@@ -3,14 +3,13 @@
     <div class="cell" 
         v-for="(cell,index) in cellData"
         :key="index"
-        @click="getDetail">
+        @click="itemEvent(cell)">
         <div class="cell-hd" v-if="iconType">
-            <!--插槽和默认方式 -->
             <i :class=iconClassObject></i>
         </div>
         <div class="cell-r">
             <div class="cell-bd">{{cell}}</div>
-            <div class="cell-ft">
+            <div class="cell-ft" @click="bindEvent">
                 <i :class=iconFtClassObject></i>
             </div>
         </div>
@@ -60,8 +59,13 @@ export default {
         }
     },
     methods: {
-        getDetail(){
-            console.log(1);
+        bindEvent(){
+            console.log(2);
+        },
+        itemEvent(cell){
+            this.$emit('itemEvent',{
+                keyword:cell
+            })
         }
     },
 }
@@ -89,7 +93,7 @@ export default {
                 display: inline-block;
                 width: 0.3rem;
                 height: 0.3rem;
-                background-color: pink;
+                // background-color: pink;
                 margin: 0 0.2rem;
             }
         }

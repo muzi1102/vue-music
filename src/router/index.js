@@ -27,7 +27,7 @@ export default new Router({
       component: search
     },
     {
-      path: '/',
+      path: '/singer',
       name: 'singer',
       component: singer
     }
