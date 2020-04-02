@@ -1,33 +1,11 @@
 <template>
     <div>
-        <!-- <mheader></mheader>
-        <tab></tab> -->
-        <div class="header-placeholder" ref="content">
-            <button @click="change">按钮</button>
-            <div class="wrapper" ref="wrapper">
-                <ul class="content">
-                    <li>值为none时，没有属性会获得过渡效果，值为all时，所有属性都将获得过渡效果，值为指定的css属性应用过渡效果，多个属性用逗号隔开值为none时，没有属性会获得过渡效果，值为all时，所有属性都将获得过渡效果，值为指定的css属性应用过渡效果，多个属性用逗号隔开</li>
-                    <li>值为none时，没有属性会获得过渡效果，值为all时，所有属性都将获得过渡效果，值为指定的css属性应用过渡效果，多个属性用逗号隔开值为none时，没有属性会获得过渡效果，值为all时，所有属性都将获得过渡效果，值为指定的css属性应用过渡效果，多个属性用逗号隔开</li>
-                     <li>值为none时，没有属性会获得过渡效果，值为all时，所有属性都将获得过渡效果，值为指定的css属性应用过渡效果，多个属性用逗号隔开值为none时，没有属性会获得过渡效果，值为all时，所有属性都将获得过渡效果，值为指定的css属性应用过渡效果，多个属性用逗号隔开</li>
-                    <li>值为none时，没有属性会获得过渡效果，值为all时，所有属性都将获得过渡效果，值为指定的css属性应用过渡效果，多个属性用逗号隔开值为none时，没有属性会获得过渡效果，值为all时，所有属性都将获得过渡效果，值为指定的css属性应用过渡效果，多个属性用逗号隔开</li>
-                     <li>值为none时，没有属性会获得过渡效果，值为all时，所有属性都将获得过渡效果，值为指定的css属性应用过渡效果，多个属性用逗号隔开值为none时，没有属性会获得过渡效果，值为all时，所有属性都将获得过渡效果，值为指定的css属性应用过渡效果，多个属性用逗号隔开</li>
-                    <li>值为none时，没有属性会获得过渡效果，值为all时，所有属性都将获得过渡效果，值为指定的css属性应用过渡效果，多个属性用逗号隔开值为none时，没有属性会获得过渡效果，值为all时，所有属性都将获得过渡效果，值为指定的css属性应用过渡效果，多个属性用逗号隔开</li>
-                     <li>值为none时，没有属性会获得过渡效果，值为all时，所有属性都将获得过渡效果，值为指定的css属性应用过渡效果，多个属性用逗号隔开值为none时，没有属性会获得过渡效果，值为all时，所有属性都将获得过渡效果，值为指定的css属性应用过渡效果，多个属性用逗号隔开</li>
-                    <li>值为none时，没有属性会获得过渡效果，值为all时，所有属性都将获得过渡效果，值为指定的css属性应用过渡效果，多个属性用逗号隔开值为none时，没有属性会获得过渡效果，值为all时，所有属性都将获得过渡效果，值为指定的css属性应用过渡效果，多个属性用逗号隔开</li>
-                     <li>值为none时，没有属性会获得过渡效果，值为all时，所有属性都将获得过渡效果，值为指定的css属性应用过渡效果，多个属性用逗号隔开值为none时，没有属性会获得过渡效果，值为all时，所有属性都将获得过渡效果，值为指定的css属性应用过渡效果，多个属性用逗号隔开</li>
-                    <li>值为none时，没有属性会获得过渡效果，值为all时，所有属性都将获得过渡效果，值为指定的css属性应用过渡效果，多个属性用逗号隔开值为none时，没有属性会获得过渡效果，值为all时，所有属性都将获得过渡效果，值为指定的css属性应用过渡效果，多个属性用逗号隔开</li>
-                     <li>值为none时，没有属性会获得过渡效果，值为all时，所有属性都将获得过渡效果，值为指定的css属性应用过渡效果，多个属性用逗号隔开值为none时，没有属性会获得过渡效果，值为all时，所有属性都将获得过渡效果，值为指定的css属性应用过渡效果，多个属性用逗号隔开</li>
-                    <li>值为none时，没有属性会获得过渡效果，值为all时，所有属性都将获得过渡效果，值为指定的css属性应用过渡效果，多个属性用逗号隔开值为none时，没有属性会获得过渡效果，值为all时，所有属性都将获得过渡效果，值为指定的css属性应用过渡效果，多个属性用逗号隔开</li>
-                     <li>值为none时，没有属性会获得过渡效果，值为all时，所有属性都将获得过渡效果，值为指定的css属性应用过渡效果，多个属性用逗号隔开值为none时，没有属性会获得过渡效果，值为all时，所有属性都将获得过渡效果，值为指定的css属性应用过渡效果，多个属性用逗号隔开</li>
-                    <li>值为none时，没有属性会获得过渡效果，值为all时，所有属性都将获得过渡效果，值为指定的css属性应用过渡效果，多个属性用逗号隔开值为none时，没有属性会获得过渡效果，值为all时，所有属性都将获得过渡效果，值为指定的css属性应用过渡效果，多个属性用逗号隔开</li>
-                     <li>值为none时，没有属性会获得过渡效果，值为all时，所有属性都将获得过渡效果，值为指定的css属性应用过渡效果，多个属性用逗号隔开值为none时，没有属性会获得过渡效果，值为all时，所有属性都将获得过渡效果，值为指定的css属性应用过渡效果，多个属性用逗号隔开</li>
-                    <li>值为none时，没有属性会获得过渡效果，值为all时，所有属性都将获得过渡效果，值为指定的css属性应用过渡效果，多个属性用逗号隔开值为none时，没有属性会获得过渡效果，值为all时，所有属性都将获得过渡效果，值为指定的css属性应用过渡效果，多个属性用逗号隔开</li>
-                     <li>值为none时，没有属性会获得过渡效果，值为all时，所有属性都将获得过渡效果，值为指定的css属性应用过渡效果，多个属性用逗号隔开值为none时，没有属性会获得过渡效果，值为all时，所有属性都将获得过渡效果，值为指定的css属性应用过渡效果，多个属性用逗号隔开</li>
-                    <li>值为none时，没有属性会获得过渡效果，值为all时，所有属性都将获得过渡效果，值为指定的css属性应用过渡效果，多个属性用逗号隔开值为none时，没有属性会获得过渡效果，值为all时，所有属性都将获得过渡效果，值为指定的css属性应用过渡效果，多个属性用逗号隔开</li>
-                     <li>值为none时，没有属性会获得过渡效果，值为all时，所有属性都将获得过渡效果，值为指定的css属性应用过渡效果，多个属性用逗号隔开值为none时，没有属性会获得过渡效果，值为all时，所有属性都将获得过渡效果，值为指定的css属性应用过渡效果，多个属性用逗号隔开</li>
-                    <li>值为none时，没有属性会获得过渡效果，值为all时，所有属性都将获得过渡效果，值为指定的css属性应用过渡效果，多个属性用逗号隔开值为none时，没有属性会获得过渡效果，值为all时，所有属性都将获得过渡效果，值为指定的css属性应用过渡效果，多个属性用逗号隔开</li>
-                </ul>
-            </div>
+        <mheader></mheader>
+        <tab></tab>
+        <div class="header-placeholder wrapper" ref="wrapper">
+            <ul class="content">
+                <p v-for="(item,index) in list" :key="index">{{item}}</p>
+            </ul>
         </div>
     </div>
 </template>
@@ -35,36 +13,68 @@
 import mheader from '@/components/header.vue';
 import tab from '@/components/tab.vue';
 import BScroll from 'better-scroll'
+const MUSIC_RANK = [0, 1, 2, 3, 4, 55, 6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,24,24,25,26,27,28,29,30];
+const count = 4
 export default {
     data() {
         return {
-            scrollL:""
+            list:[1,23,4,5,6,7,8,9,0,8,55,6,7,8],
+            scrollInstance:"",
+            offset:0
+            // threshold:0,
+            // moreTxt:'加载更多',
+            // noMoreTxt:'没有更多数据了'
         }
     },
     components:{
         mheader,
         tab
     },
-    methods: {
-        change(){
-            this.$refs.content.style.transform = `translate(0,-400px)`; 
-        }
-    },
     created() {
         
     },
     mounted() {
-        this.$nextTick(()=>{
-            this.scroll = new BScroll(this.$refs.wrapper,{});
-        })
-        
+        this._initScroll();
+        this.getData();
     },
+    methods: {
+        _initScroll(){
+            this.$nextTick(()=>{
+                this.scrollInstance = new BScroll(this.$refs.wrapper,{
+                    fade: true,
+                    probeType:3,
+                    pullUpLoad: {
+                        threshold: 50,
+                        moreTxt:'加载更多',
+                        noMoreTxt:'没有更多数据了'
+                    }
+                });
+                this.scrollInstance.on('pullingUp',(pos) => {
+                    // if (pos.y > 50) {
+                    //     this.loadData()
+                    // }
+                    this.getData();
+                    // console.log('无限架子啊');
+                    this.scrollInstance.finishPullUp();
+              })
+            })
+        },
+        getData(){
+            const urls = MUSIC_RANK.slice(0,count);
+            console.log(urls);
+            // Promise.all()
+        },
+        getRank(){
+
+        }
+    }
 }
 </script>
 
-<!--   -->
 <style scoped lang="scss">
-    li{
-        height: 3rem;
-    }
+p{
+    height: 1rem;
+    line-height: 1rem;
+    background-color: salmon;
+}
 </style>
