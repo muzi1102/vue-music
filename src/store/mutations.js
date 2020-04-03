@@ -6,6 +6,9 @@ const mutations = {
     },
     [types.SET_LOADING](state,loading){
         state.loading = loading;
+    },
+    setRankList(state,data){
+        state.rankList = rankList;
     }
 };
 
