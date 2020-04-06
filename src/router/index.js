@@ -6,16 +6,24 @@ import recommend from '@/pages/recommend';
 import rank from '@/pages/rank';
 import search from '@/pages/search';
 import singer from '@/pages/singer';
-import rankDetail from '@/pages/rankDetail';
+import rankDetail from '@/pages/rank_detail';
 
 Vue.use(Router)
 
 export default new Router({
   routes: [
     {
-      path: '/',
+      path:'/',
+      redirect: '/recommend'
+    },
+    {
+      path: '/recommend',
       name: 'recommend',
-      component: recommend
+      component: recommend,
+      children:[{
+        path:':id',
+        component:rankDetail
+      }]
     },
     {
       path: '/rank',
