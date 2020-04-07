@@ -1,5 +1,7 @@
 import * as types from './mutation-types'
 
+import {saveFavorite,deleteFavorite} from '@/assets/js/cache.js';
+
 export const increment = ({commit})=>{
     commit(types.INCREMENT);
 }
@@ -28,6 +30,18 @@ export const SET_PLAYING_STATE = function({commit},flag){
 export const SET_CURRENT_INDEX = function({commit},index){
     commit(types.SET_CURRENT_INDEX,index);
 }
+
+export const SET_PLAY_MODE = function ({commit},mode) {
+    commit(types.SET_PLAY_MODE,mode);
+}
+
+export const saveFavoriteList = function ({commit},song) {
+    commit(types.SET_FAVORITE_LIST,saveFavorite(song));
+}
+export const deleteFavoriteList = function ({commit},song) {
+    commit(types.SET_FAVORITE_LIST,deleteFavorite(song));
+}
+
 // 这里的原因  对es6的理解不够
 // const actions = {
 //     [types.INCREMENT]({commit}) {
