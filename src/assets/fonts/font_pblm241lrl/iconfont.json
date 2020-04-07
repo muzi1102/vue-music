@@ -62,11 +62,25 @@
       "unicode_decimal": 58892
     },
     {
+      "icon_id": "6166486",
+      "name": "stop",
+      "font_class": "stop",
+      "unicode": "e716",
+      "unicode_decimal": 59158
+    },
+    {
       "icon_id": "6955176",
       "name": "清除",
       "font_class": "qingchu",
       "unicode": "e630",
       "unicode_decimal": 58928
+    },
+    {
+      "icon_id": "7774951",
+      "name": "删 除",
+      "font_class": "shanchu-copy",
+      "unicode": "e514",
+      "unicode_decimal": 58644
     },
     {
       "icon_id": "7823878",
@@ -95,6 +109,13 @@
       "font_class": "shangyiqu",
       "unicode": "e6a8",
       "unicode_decimal": 59048
+    },
+    {
+      "icon_id": "12785771",
+      "name": "删除／数字面板编辑态",
+      "font_class": "shanchu",
+      "unicode": "e501",
+      "unicode_decimal": 58625
     },
     {
       "icon_id": "13198408",

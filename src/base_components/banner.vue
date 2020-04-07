@@ -11,7 +11,7 @@ import BScroll from 'better-scroll'
 export default {
     data() {
         return {
-            
+            currentPageIndex:0
         }
     },
     props:{
@@ -25,23 +25,34 @@ export default {
         },
         interval: {
             type: Number,
-            default: 3000
+            default: 1000
         }
     },
     mounted() {
         setTimeout(() => {
             this.setSliderWidth();
             this.initSlider();
-            if (this.autoPlay) {
-                this._play();
-            }
+            // if (this.autoPlay) {
+            //     this._play();
+            // }
+            this._onScrollEnd();
         }, 20);
     },
     methods: {
-        _play(){
-
+        _onScrollEnd(){
+            let pageIndex = this.slider.getCurrentPage();
+            console.log(pageIndex)
         },
-        setSliderWidth(){
+        _play(){
+            // let pageIndex = this.currentPageIndex + 1;
+            // if (this.loop) {
+            //     pageIndex += 1;
+            // }
+            // this.timer = setTimeout(() => {
+            //     this.slider.goToPage(pageIndex, 0, 400)
+            // }, this.interval);
+        },
+        setSliderWidth(isResize){
             this.children = this.$refs.sliderContent.children;
             console.log(this.children);
             let width = 0;
@@ -53,20 +64,29 @@ export default {
                 child.style.width = sliderWidth + 'px';
                 width += sliderWidth;
             }
+            if (this.loop && !isResize) {
+                width += 2 * sliderWidth;
+            }
             this.$refs.sliderContent.style.width = width + 'px';
         },
         initSlider(){
             this.slider = new BScroll(this.$refs.slider,{
                 scrollX: true,
-                scrollY: false,
                 momentum: false,
                 snap: {
-                    loop:this.loop,
-                    threshold: 0.3,
-                    speed: 400
+                    loop: this.loop, // 开启循环播放
+                    // stepX: 200, // 每页宽度为 200px
+                    // stepY: 100, // 每页高度为 100px
+                    threshold: 0.3, // 滚动距离超过宽度/高度的 30% 时切换图片
+                    speed: 400 // 切换动画时长 400ms
                 },
+                // snap: true,
+                // snapLoop: true,
+                // snapThreshold: 0,
+                // snapSpeed: 400,
                 click:true
             });
+            this.slider.on('scrollEnd',this._onScrollEnd);
         }
     },
 }

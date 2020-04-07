@@ -51,7 +51,6 @@ export default {
             }).then((res)=>{
                 if (res.code === 200) {
                     this.bannerList = res.banners;
-                    console.log(this.bannerList.length);
                 }
             })
         },
@@ -65,8 +64,8 @@ export default {
 </script>
 <style scoped lang="scss">
 .banner{
-    // position: relative;
-    // width: 100%;
-    // overflow: hidden;
+    position: relative;
+    width: 100%;
+    overflow: hidden;
 }
 </style>
