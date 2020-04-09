@@ -27,6 +27,12 @@ const mutations = {
     },
     [types.SET_FAVORITE_LIST](state, list) {
         state.favoriteList = list
+    },
+    [types.ADD_SONG_TAG](state,tag){
+        state.myTag.push(tag);
+    },
+    [types.EDIT_TAG_FLAG](state,tag){
+        state.editTagFlag = tag;
     }
 };
 

@@ -42,6 +42,19 @@ export const deleteFavoriteList = function ({commit},song) {
     commit(types.SET_FAVORITE_LIST,deleteFavorite(song));
 }
 
+export const addSongTag = function ({commit},tag) {
+    commit(types.ADD_SONG_TAG,tag);
+}
+
+export const editTagFlag = function ({commit},flag) {
+    commit(types.EDIT_TAG_FLAG,flag)
+}
+
+export const setTag = function({commit},item){
+    console.log(item);
+}
+
+
 // 这里的原因  对es6的理解不够
 // const actions = {
 //     [types.INCREMENT]({commit}) {

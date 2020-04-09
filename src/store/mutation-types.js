@@ -12,4 +12,8 @@ export const SET_PLAYING_STATE = 'SET_PLAYING_STATE';
 
 export const SET_PLAY_MODE = 'SET_PLAY_MODE';
 
-export const SET_FAVORITE_LIST = 'SET_FAVORITE_LIST'
+export const SET_FAVORITE_LIST = 'SET_FAVORITE_LIST';
+
+export const ADD_SONG_TAG = 'ADD_SONG_TAG';
+
+export const EDIT_TAG_FLAG = 'EDIT_TAG_FLAG';
