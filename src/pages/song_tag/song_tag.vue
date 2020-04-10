@@ -48,7 +48,7 @@ export default {
         toggleBtn(){
             // 区分是是完成还是编辑
             this.toggleTagFlag(!this.editTagFlag);
-            // 完成把这个放在缓存中
+            // 完成把这个放在本地缓存中
         },
         toggleTagDelete(opts){
             this.setTag({
@@ -56,10 +56,11 @@ export default {
                 index:opts.item.index,
                 mode:'del'
             });
+            // 这里怎么做动画？？？
             this.addOrRemoveTag({
                 item:opts.item,
                 mode:'del',
-                index:opts.item.index
+                index:opts.index
             });
         },
         toggleTagAdd(opts){
