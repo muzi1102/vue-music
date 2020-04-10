@@ -12,6 +12,9 @@ import vant from 'vant'
 import 'vant/lib/index.css';
 Vue.use(vant)
 
+//注册全局组件
+import mheader from '@/base_components/header.vue'
+Vue.component('mheader',mheader)
 /* eslint-disable no-new */
 new Vue({
   el: '#app',

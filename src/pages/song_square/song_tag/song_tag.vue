@@ -1,17 +1,20 @@
 <template>
-    <transition name="right">
-        <div class="song_tag">
-            <div class="my-tag">
-                <div class="my-tag-title">
-                    <h4>我的歌单广场</h4>
-                    <span class="tip">(长按可编辑)</span>
-                    <span class="editBtn" @click="toggleBtn">{{btnMsg}}</span>
-                </div>
-                <tag-item ref="tagItem" :tagGroup="myTag" @toggleTag="toggleTagDelete"></tag-item>
-            </div>
-            <tag :tag="tag" ref="tagItems" @toggleTag="toggleTagAdd"></tag>
+<div class="song_tag">
+    <mheader title="所有歌单">
+        <span slot="left" @click="back">
+            <i class="iconfont icon-fanhui"></i>
+        </span>
+    </mheader>
+    <div class="my-tag">
+        <div class="my-tag-title">
+            <h4>我的歌单广场</h4>
+            <span class="tip">(长按可编辑)</span>
+            <span class="editBtn" @click="toggleBtn">{{btnMsg}}</span>
         </div>
-    </transition>
+        <tag-item ref="tagItem" :tagGroup="myTag" @toggleTag="toggleTagDelete"></tag-item>
+    </div>
+    <tag :tag="tag" ref="tagItems" @toggleTag="toggleTagAdd"></tag>
+</div>
 </template>
 
 <script>
@@ -45,6 +48,9 @@ export default {
             // deleteTag:'deleteSongTag',
             setTag:'setTag'
         }),
+        back(){
+            this.$emit('back',false);
+        },
         toggleBtn(){
             // 区分是是完成还是编辑
             this.toggleTagFlag(!this.editTagFlag);
@@ -122,13 +128,5 @@ export default {
     }
     
 }
-.right-enter,.right-leave-to{
-    transform: translate3d(0, 100%, 0);
-}
-.right-leave,.right-enter-to{
-    transform: translate3d(0, 0, 0)
-}
-.right-enter-active,.right-leave-active{
-    transition:all .1s;
-}
+
 </style>

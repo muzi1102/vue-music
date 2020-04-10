@@ -28,7 +28,7 @@ export default {
     mounted() {
         setTimeout(() => {
             this.initScrollY();
-        }, 20);
+        }, 200);
     },
     methods: {
         initScrollY(){
@@ -38,7 +38,8 @@ export default {
         _initWidth(){
             let width = 0;
             this.children = this.$refs.hSliderContent.children;
-            width = this.children[0].clientWidth * this.children.length + (10*(this.children.length-1));
+            console.log(this.children);
+            width = this.children[0].clientWidth * this.children.length + (10*(this.children.length));
             this.$refs.hSliderContent.style.width = width + 'px';
         },
         _initSlider(){

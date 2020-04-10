@@ -2,7 +2,7 @@
     <div>
         <ul class="tag-group" ref="tagGroup">
             <li class="tag-group-item" :ref="`tagItem${index}`" :class="{'tag-group-item-disabled':item.disabled}"  @click="toggleTag(item,index)" v-for="(item,index) in tagGroup" :key="index">
-                <i v-if="item.icon" class=iconfont :class="[`icon${item.icon}`]"></i>
+                <i v-if="item.icon" class="iconfont icon-color" :class="[`icon-${item.icon}`]"></i>
                 <span>{{item.name}}</span>
             </li>
         </ul>
@@ -71,6 +71,9 @@ export default {
     }
     &-item-disabled{
         background-color: brown;
+    }
+    .icon-color{
+        color: #d43c33;
     }
 }
 </style>

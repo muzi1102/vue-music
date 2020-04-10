@@ -27,11 +27,11 @@ function _initTag() {
         */
         language:{
             title:'语种',
-            items:[{name:'华语',icon:'icon-xihuan'},{name:'欧美'},{name:'日语'},{name:'韩语'},{name:'粤语'}]
+            items:[{name:'华语',icon:'huore'},{name:'欧美'},{name:'日语'},{name:'韩语'},{name:'粤语'}]
         },
         style:{
             title:'风格',
-            items:[{name:'流行',icon:'hot'},{name:'摇滚',icon:'hot'},{name:'民谣',icon:'hot'},{name:'电子',icon:'hot'},{name:'舞曲'},
+            items:[{name:'流行',icon:'huore'},{name:'摇滚',icon:'huore'},{name:'民谣',icon:'huore'},{name:'电子',icon:'huore'},{name:'舞曲'},
             {name:'说唱'},{name:'爵士'}]
         }
     }
