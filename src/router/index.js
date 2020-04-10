@@ -9,6 +9,7 @@ import singer from '@/pages/singer';
 import rankDetail from '@/pages/rank_detail';
 import squareSong from '@/pages/song_square/song_square.vue';
 import tag from '@/pages/song_tag/song_tag';
+import test from '@/pages/test.vue';
 
 Vue.use(Router)
 
@@ -57,6 +58,11 @@ export default new Router({
             path:'/tag',
             component:tag
         }]
+    },
+    {
+        path:'/test',
+        name:'test',
+        component:test
     }
   ]
 })

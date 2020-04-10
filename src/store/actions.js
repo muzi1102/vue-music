@@ -42,7 +42,7 @@ export const deleteFavoriteList = function ({commit},song) {
     commit(types.SET_FAVORITE_LIST,deleteFavorite(song));
 }
 
-export const addSongTag = function ({commit},tag) {
+export const addOrRemoveTag = function ({commit},tag) {
     commit(types.ADD_SONG_TAG,tag);
 }
 
@@ -51,7 +51,7 @@ export const editTagFlag = function ({commit},flag) {
 }
 
 export const setTag = function({commit},item){
-    console.log(item);
+    commit(types.EDIT_TAG_ITEM,item);
 }
 
 

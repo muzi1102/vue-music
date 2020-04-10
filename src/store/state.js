@@ -9,11 +9,21 @@ const state = {
     playing:false,//是否在播放
     mode:0,//0表示顺序播放，1代表循环，2表示随机播放
     favoriteList:[],
-    tag:{
+    tag:_initTag(),
+    myTag:[{name:'推荐'},{name:'官方'},{name:'精品'}],
+    editTagFlag:false,//标签页面的编辑状态
+}
+  
+export default state
+
+
+function _initTag() {
+    let tagObjItem = {
         /*
             name:标签的名字
             icon：图标
             disabled:是否可点击
+            _parent:所属种类
         */
         language:{
             title:'语种',
@@ -24,10 +34,13 @@ const state = {
             items:[{name:'流行',icon:'hot'},{name:'摇滚',icon:'hot'},{name:'民谣',icon:'hot'},{name:'电子',icon:'hot'},{name:'舞曲'},
             {name:'说唱'},{name:'爵士'}]
         }
-    },
-    myTag:[{name:'推荐'},{name:'官方'},{name:'精品'}],
-    editTagFlag:false,//标签页面的编辑状态
+    }
+    for(var key in tagObjItem){
+        tagObjItem[key].items.forEach((item,index)=>{
+            item.disabled = false;
+            item._parent = key;
+            item.index = index;
+        });
+    }
+    return tagObjItem;
 }
-  
-export default state
-  

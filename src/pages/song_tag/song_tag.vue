@@ -7,9 +7,9 @@
                     <span class="tip">(长按可编辑)</span>
                     <span class="editBtn" @click="toggleBtn">{{btnMsg}}</span>
                 </div>
-                <tag-item :tagGroup="myTag"></tag-item>
+                <tag-item ref="tagItem" :tagGroup="myTag" @toggleTag="toggleTagDelete"></tag-item>
             </div>
-            <tag :tag="tag"></tag>
+            <tag :tag="tag" ref="tagItems" @toggleTag="toggleTagAdd"></tag>
         </div>
     </transition>
 </template>
@@ -40,11 +40,48 @@ export default {
     },
     methods: {
         ...mapActions({
-            toggleTagFlag : 'editTagFlag'
+            toggleTagFlag : 'editTagFlag',
+            addOrRemoveTag:'addOrRemoveTag',
+            // deleteTag:'deleteSongTag',
+            setTag:'setTag'
         }),
         toggleBtn(){
+            // 区分是是完成还是编辑
             this.toggleTagFlag(!this.editTagFlag);
             // 完成把这个放在缓存中
+        },
+        toggleTagDelete(opts){
+            this.setTag({
+                item:opts.item,
+                index:opts.item.index,
+                mode:'del'
+            });
+            this.addOrRemoveTag({
+                item:opts.item,
+                mode:'del',
+                index:opts.item.index
+            });
+        },
+        toggleTagAdd(opts){
+            if (opts.item.disabled) {
+                return false;
+            }
+            // this.addToMyTagAnimation();
+            // 
+            this.addOrRemoveTag({
+                item:opts.item,
+                index:opts.index,
+                mode:'add'
+            });
+            // 判断这个标签的状态是否为可点击
+            this.setTag({
+                item:opts.item,
+                index:opts.index,
+                mode:'add'
+            });
+        },
+        addToMyTagAnimation(){
+            console.log(this.$refs.tagItem.children);
         }
     },
 }
@@ -64,6 +101,7 @@ export default {
         .my-tag-title{
             display: flex;
             flex-direction: row;
+            margin-bottom: 0.2rem;
             h4{
                 font-size: 0.3rem;
             }

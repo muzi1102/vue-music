@@ -3,7 +3,7 @@
         <!-- 支持slot的模式具体这里去看mntui -->
         <div class="tag-item" v-for="tagGroup in tag" :key="tagGroup.key">
             <h4 class="title">{{tagGroup.title}}</h4>
-            <tag-item :tagGroup="tagGroup.items"></tag-item>
+            <tag-item  :tagGroup="tagGroup.items" @toggleTag="_toggleTag"></tag-item>
         </div>
     </div>
 </template>
@@ -24,7 +24,12 @@ export default {
     },
     components:{
         tagItem
-    }
+    },
+    methods: {
+        _toggleTag(opts){
+            this.$emit('toggleTag',opts)
+        }
+    },
 }
 </script>
 <style lang="scss" scoped>
