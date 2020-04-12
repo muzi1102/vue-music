@@ -1,10 +1,20 @@
 export const set_localStorage = (key, value)=>{
-    localStorage.setItem(key, JSON.stringify(value));
+    if(!name){
+        console.error('请传入localStoage的key');
+        return
+    }
+    localStorage.setItem(key,JSON.stringify(value));
 }
-export const get_localStorage = (key, value)=>{
-    return JSON.parse(localStorage.getItem(key));
+export const get_localStorage = (key)=>{
+    if (!key) {
+        return false;
+    }
+    return localStorage.getItem(key) && JSON.parse(localStorage.getItem(key));
 }
 export const remove_localStorage = (key)=>{
+    if (!key) {
+        return false;
+    }
     localStorage.removeItem(key);
 }
 function getRandomInt(min, max) {

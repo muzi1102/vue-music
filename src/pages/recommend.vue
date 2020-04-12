@@ -12,25 +12,9 @@
             </banner> -->
         </div>
         <ul class="nav-tab">
-            <li>
-                <i></i>
-                <h4>每日推荐</h4>
-            </li>
-            <li>
-                <i></i>
-                <h4>歌单</h4>
-            </li>
-            <li>
-                <i></i>
-                <h4>排行榜</h4>
-            </li>
-            <li>
-                <i></i>
-                <h4>电台</h4>
-            </li>
-            <li>
-                <i></i>
-                <h4>直播</h4>
+            <li v-for="item in navItem">
+                <i class="iconfont" :class="[`icon-${item.icon}`]"></i>
+                <h4>{{item.name}}</h4>
             </li>
         </ul>
         <div class="recommend-list">
@@ -90,7 +74,24 @@ export default {
             bannerList:[],
             djData:[],
             songList:[],
-            newSongList:[]
+            newSongList:[],
+            navItem:[{
+                name:'每日推荐',
+                icon:'rili',
+                id:'recommend'
+            },{
+                name:'歌单',
+                icon:'yinle',
+                id:'list'
+            },{
+                name:'排行榜',
+                icon:'paihangbang',
+                id:'rank'
+            },{
+                name:'直播',
+                icon:'diantai',
+                id:'video'
+            }]
         }
     },
     components:{
@@ -227,8 +228,11 @@ export default {
     height: 1rem;
     background-color: cyan;
     li{
-        flex: 1;
-        background-color: chocolate;
+        flex:1;
+        text-align:center;
+    }
+    .iconnfont{
+        font-size: 0.5rem;
     }
 }
 </style>

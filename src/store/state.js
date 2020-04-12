@@ -1,4 +1,4 @@
-import {loadFavorite} from '@/assets/js/cache.js';
+import {loadFavorite,loadTag} from '@/assets/js/cache.js';
 const state = {
     count:0,
     loadig:false,//loading加载的显示   
@@ -10,7 +10,7 @@ const state = {
     mode:0,//0表示顺序播放，1代表循环，2表示随机播放
     favoriteList:[],
     tag:_initTag(),
-    myTag:[{name:'推荐'},{name:'官方'},{name:'精品'}],
+    myTag:loadTag().length ? loadTag():[{name:'推荐',fixed:true},{name:'官方',fixed:true},{name:'精品',fixed:true}],
     editTagFlag:false,//标签页面的编辑状态
 }
   
@@ -27,11 +27,11 @@ function _initTag() {
         */
         language:{
             title:'语种',
-            items:[{name:'华语',icon:'huore'},{name:'欧美'},{name:'日语'},{name:'韩语'},{name:'粤语'}]
+            items:[{name:'华语',id:'chinese',hot:true},{name:'欧美',id:'occident'},{name:'日语',id:'japan'},{name:'韩语',id:'korean'},{name:'粤语',id:'Cantonese'}]
         },
         style:{
             title:'风格',
-            items:[{name:'流行',icon:'huore'},{name:'摇滚',icon:'huore'},{name:'民谣',icon:'huore'},{name:'电子',icon:'huore'},{name:'舞曲'},
+            items:[{name:'流行',hot:true},{name:'摇滚',hot:true},{name:'民谣',hot:true},{name:'电子',hot:true},{name:'舞曲'},
             {name:'说唱'},{name:'爵士'}]
         }
     }
@@ -40,6 +40,7 @@ function _initTag() {
             item.disabled = false;
             item._parent = key;
             item.index = index;
+            item.add = true;
         });
     }
     return tagObjItem;

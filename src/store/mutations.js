@@ -34,10 +34,12 @@ const mutations = {
         }else if(tag.mode ==='add'){
             state.myTag.push({
                 name:tag.item.name,
-                icon:tag.item.icon,
+                hot:tag.item.hot,
                 disabled:false,
                 _parent:tag.item._parent,
-                index:tag.item.index
+                index:tag.item.index,
+                del:true,
+                dataid:tag.item.id
             });
         }
     },

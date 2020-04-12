@@ -6,6 +6,48 @@
   "description": "",
   "glyphs": [
     {
+      "icon_id": "5961113",
+      "name": "减少",
+      "font_class": "jianshao",
+      "unicode": "e621",
+      "unicode_decimal": 58913
+    },
+    {
+      "icon_id": "1359684",
+      "name": "日历 (6)",
+      "font_class": "rili",
+      "unicode": "e64c",
+      "unicode_decimal": 58956
+    },
+    {
+      "icon_id": "5168277",
+      "name": "直播",
+      "font_class": "zhibo",
+      "unicode": "e6f1",
+      "unicode_decimal": 59121
+    },
+    {
+      "icon_id": "5954984",
+      "name": "电台",
+      "font_class": "diantai",
+      "unicode": "e79c",
+      "unicode_decimal": 59292
+    },
+    {
+      "icon_id": "9806922",
+      "name": "排行榜",
+      "font_class": "paihangbang",
+      "unicode": "e625",
+      "unicode_decimal": 58917
+    },
+    {
+      "icon_id": "10177285",
+      "name": "音乐",
+      "font_class": "yinle",
+      "unicode": "e7b5",
+      "unicode_decimal": 59317
+    },
+    {
       "icon_id": "3068603",
       "name": "更多",
       "font_class": "gengduo1",
@@ -60,13 +102,6 @@
       "font_class": "ziyuan",
       "unicode": "e6cb",
       "unicode_decimal": 59083
-    },
-    {
-      "icon_id": "4139630",
-      "name": "减少 去掉 缩减 删除 收起 线性",
-      "font_class": "jianshaoqudiaosuojianshanchushouqixianxing",
-      "unicode": "e916",
-      "unicode_decimal": 59670
     },
     {
       "icon_id": "5680386",

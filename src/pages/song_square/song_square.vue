@@ -7,7 +7,7 @@
         </mheader>
         <div class="nav-group">
             <hscroll>
-                <li class="nav-item" v-for="(item,index) in navbar" :key="index">{{item}}</li>
+                <li class="nav-item" @click="getList(item.name)" v-for="(item,index) in myTag" :key="index">{{item.name}}</li>
             </hscroll>
         </div>
         <span class="change" @click="selectSongTag">
@@ -21,17 +21,25 @@
 <script>
 import hscroll from '@/base_components/horizontal-scroll.vue';
 import songTag from './song_tag/song_tag.vue';
+import {mapGetters} from 'vuex';
 export default {
     data() {
         return {
             tagFlag:false,
             show:false,
-            navbar:['推荐','官方','精选','欧美','电子','亲亲']
         }
     },
     components:{
         hscroll,
         songTag
+    },
+    computed: {
+        ...mapGetters([
+            'myTag'
+        ])
+    },
+    created() {
+        this.getList();
     },
     methods: {
         selectSongTag(){
@@ -43,6 +51,39 @@ export default {
         backPre(){
             this.$router.back(-1);
             // this.$router.go(-1)
+        },
+        getList(cat){
+            // /personalized
+            let reqData = {
+                url:'/api/playlist/hot',
+                data:{
+                    limit:10
+                }
+            }
+            switch(cat){
+                case '推荐':
+                    Object.assign(reqData,{
+                        url:'/api/personalized'
+                    });
+                    break;
+                case '精品':
+                    Object.assign(reqData,{
+                        url:'/top/playlist/highquality'
+                    });
+                    break;
+                default:
+                    Object.assign(reqData,{
+                        data:{
+                            cat:cat
+                        }
+                    })
+                    break;
+            }
+            console.log(reqData);
+            // this.getData();
+        },
+        getData(){
+
         }
     }
 }

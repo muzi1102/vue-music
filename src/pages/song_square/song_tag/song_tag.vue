@@ -11,20 +11,24 @@
             <span class="tip">(长按可编辑)</span>
             <span class="editBtn" @click="toggleBtn">{{btnMsg}}</span>
         </div>
-        <tag-item ref="tagItem" :tagGroup="myTag" @toggleTag="toggleTagDelete"></tag-item>
+        <tag-item :tagGroup="myTag" @toggleTag="toggleTagDelete"></tag-item>
     </div>
-    <tag :tag="tag" ref="tagItems" @toggleTag="toggleTagAdd"></tag>
+    <div class="tag">
+        <div class="tag-item" v-for="tagGroup in tag" :key="tagGroup.key">
+            <h4 class="title">{{tagGroup.title}}</h4>
+            <tag-item ref="tagItems"  :tagGroup="tagGroup.items" @toggleTag="toggleTagAdd"></tag-item>
+        </div>
+    </div>
 </div>
 </template>
 
 <script>
-import tag from './tag.vue';
 import tagItem from './tag_item.vue';
 import {mapGetters,mapActions} from 'vuex';
+import {saveTag} from '@/assets/js/cache.js';
 export default {
     data() {
         return {
-            // editTagFlag:false
         }
     },
     computed: {
@@ -38,7 +42,6 @@ export default {
         }
     },
     components:{
-        tag,
         tagItem
     },
     methods: {
@@ -55,8 +58,15 @@ export default {
             // 区分是是完成还是编辑
             this.toggleTagFlag(!this.editTagFlag);
             // 完成把这个放在本地缓存中
+            if (!this.editTagFlag) {
+                saveTag(this.myTag);
+            }
         },
         toggleTagDelete(opts){
+            // this.$refs.tagItems[0].drop(opts.item.dataid,event);
+            if (opts.item.fixed && this.editTagFlag) {
+                return false;
+            }
             this.setTag({
                 item:opts.item,
                 index:opts.item.index,
@@ -70,7 +80,7 @@ export default {
             });
         },
         toggleTagAdd(opts){
-            if (opts.item.disabled) {
+            if (opts.item.disabled && this.editTagFlag) {
                 return false;
             }
             // this.addToMyTagAnimation();
@@ -126,7 +136,16 @@ export default {
             }
         }
     }
-    
+    .tag{
+        padding: 0.8rem 0.2rem 0;
+        &-item{
+            margin-bottom: 0.5rem;
+            .title{
+                margin-bottom: 0.2rem;
+                font-size: 0.3rem;
+            }
+        }
+    }
 }
 
 </style>
