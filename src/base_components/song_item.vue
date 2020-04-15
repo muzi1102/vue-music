@@ -1,5 +1,5 @@
 <template>
-<ul class="song">
+<ul class="song" ref="song">
     <li class="song-item" v-for="item in list" :key="item.id">
         <img class="song-img" :src="item.picUrl" alt="">
         <p class="song-title">{{item.name}}</p>
