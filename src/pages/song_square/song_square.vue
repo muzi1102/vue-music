@@ -6,32 +6,51 @@
             </span>
         </mheader>
         <div class="nav-group">
-            <hscroll>
+            <hscroll :data="myTag">
                 <li class="nav-item" @click="getList(item.name)" v-for="(item,index) in myTag" :key="index">{{item.name}}</li>
             </hscroll>
+            <span class="change" @click="selectSongTag">
+                <i class="iconfont icon-gengduo"></i>
+            </span>
         </div>
-        <span class="change" @click="selectSongTag">
-            <i class="iconfont icon-gengduo"></i>
-        </span>
+        <div class="square-content">
+            <song-item :list="songList"></song-item>
+        </div>
         <transition name="right">
             <song-tag @back="back" v-if="show"></song-tag>
         </transition>
     </div>
 </template>
 <script>
-import hscroll from '@/base_components/horizontal-scroll.vue';
+import hscroll from '@/base_components/horizontal_scroll.vue';
+import songItem from '@/base_components/song_item.vue';
 import songTag from './song_tag/song_tag.vue';
 import {mapGetters} from 'vuex';
+import 'swiper/css/swiper.css';
+// import { swiper, swiperSlide } from 'vue-awesome-swiper'
 export default {
     data() {
         return {
             tagFlag:false,
             show:false,
+            bannerStack:[],
+            currentNav:'推荐',
+            songList:[]
+            // size:[
+            //     {"top":60,"left":0,"width":200,"height":100,"zIndex":1,"opacity":0,"background":'red'},
+            //     {"top":60,"left":0,"width":200,"height":100,"zIndex":2,"opacity":40,"background":'pink'},
+            //     {"top":30,"left":150,"width":300,"height":140,"zIndex":3,"opacity":70,"background":'blue'},
+            //     {"top":0,"left":300,"width":400,"height":180,"zIndex":4,"opacity":100,"background":'yellow'},
+            //     {"top":30,"left":550,"width":300,"height":140,"zIndex":3,"opacity":70,"background":'green'},
+            //     {"top":60,"left":800,"width":200,"height":100,"zIndex":2,"opacity":40,"background":'black'},
+            //     {"top":60,"left":800,"width":200,"height":100,"zIndex":1,"opacity":0,"background":'orange'}
+            // ]
         }
     },
     components:{
         hscroll,
-        songTag
+        songTag,
+        songItem
     },
     computed: {
         ...mapGetters([
@@ -39,7 +58,7 @@ export default {
         ])
     },
     created() {
-        this.getList();
+        this.getList('推荐');
     },
     methods: {
         selectSongTag(){
@@ -53,7 +72,7 @@ export default {
             // this.$router.go(-1)
         },
         getList(cat){
-            // /personalized
+            this.currentNav = cat;
             let reqData = {
                 url:'/api/playlist/hot',
                 data:{
@@ -79,11 +98,27 @@ export default {
                     })
                     break;
             }
-            console.log(reqData);
-            // this.getData();
+            // console.log(reqData);
+            this.getData(reqData).then((res)=>{
+                if (res.code === 200) {
+                    if (cat === '推荐') {
+                        this.bannerStack = res.result.slice(0,3);
+                    }
+                    this.songList = res.result;
+                }
+            })
         },
-        getData(){
-
+        getData(reqData){
+            return new Promise((resolve,reject)=>{
+                this.$get({
+                    url:reqData.url,
+                    data:reqData.data
+                }).then((res)=>{
+                    resolve(res);
+                }).catch((err)=>{
+                    reject(err);
+                })
+            });
         }
     }
 }

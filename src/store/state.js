@@ -1,4 +1,4 @@
-import {loadFavorite,loadTag} from '@/assets/js/cache.js';
+import {loadFavorite,loadTag,loadMyTag} from '@/assets/js/cache.js';
 const state = {
     count:0,
     loadig:false,//loading加载的显示   
@@ -9,8 +9,9 @@ const state = {
     playing:false,//是否在播放
     mode:0,//0表示顺序播放，1代表循环，2表示随机播放
     favoriteList:[],
-    tag:_initTag(),
-    myTag:loadTag().length ? loadTag():[{name:'推荐',fixed:true},{name:'官方',fixed:true},{name:'精品',fixed:true}],
+    tag:Object.keys(loadTag()).length?loadTag():_initTag(),
+    myTag:loadMyTag().length ? loadMyTag():
+        [{name:'推荐',fixed:true},{name:'官方',fixed:true},{name:'精品',fixed:true},{name:'华语',id:'chinese',hot:true},{name:'流行',hot:true}],
     editTagFlag:false,//标签页面的编辑状态
 }
   

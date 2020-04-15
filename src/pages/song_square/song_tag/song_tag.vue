@@ -25,7 +25,7 @@
 <script>
 import tagItem from './tag_item.vue';
 import {mapGetters,mapActions} from 'vuex';
-import {saveTag} from '@/assets/js/cache.js';
+import {saveTag,saveMyTag } from '@/assets/js/cache.js';
 export default {
     data() {
         return {
@@ -59,7 +59,8 @@ export default {
             this.toggleTagFlag(!this.editTagFlag);
             // 完成把这个放在本地缓存中
             if (!this.editTagFlag) {
-                saveTag(this.myTag);
+                saveMyTag(this.myTag);
+                saveTag(this.tag);
             }
         },
         toggleTagDelete(opts){

@@ -23,12 +23,13 @@
                 <span @click="getMoreInfo">查看更多</span>
             </div>
             <div class="recommend-slider-group">
-                <hscroll>
+                <hscroll childrenDept=2>
                     <!-- todo 歌单的播放量 -->
-                    <li class="item" v-for="item in songList" :key="item.id">
+                    <!-- <li class="item" v-for="item in songList" :key="item.id">
                         <img :src="item.picUrl" alt="">
                         <h4>{{item.name}}</h4>
-                    </li>
+                    </li> -->
+                    <song-item :list="songList"></song-item>
                 </hscroll>
             </div>
         </div>
@@ -38,11 +39,12 @@
                 <span @click="getMoreInfo">查看更多</span>
             </div>
             <div class="recommend-new-group">
-                <hscroll>
-                    <li class="item" v-for="item in newSongList" :key="item.id">
+                <hscroll childrenDept=2>
+                    <!-- <li class="item" v-for="item in newSongList" :key="item.id">
                         <img :src="item.picUrl" alt="">
                         <h4>{{item.name}}</h4>
-                    </li>
+                    </li> -->
+                    <song-item :list="newSongList"></song-item>
                 </hscroll>
             </div>
         </div>
@@ -52,11 +54,12 @@
                 <span @click="getMoreInfo">查看更多</span>
             </div>
             <div class="recommend-dj-group">
-                <hscroll>
-                    <li class="item" v-for="item in djData" :key="item.id">
+                <hscroll childrenDept=2>
+                    <!-- <li class="item" v-for="item in djData" :key="item.id">
                         <img :src="item.picUrl" alt="">
                         <h4>{{item.name}}</h4>
-                    </li>
+                    </li> -->
+                    <song-item :list="djData"></song-item>
                 </hscroll>
             </div>
         </div>
@@ -67,7 +70,8 @@
 import mheader from '@/components/header.vue';
 import tab from '@/components/tab.vue';
 import banner from '@/base_components/banner.vue';
-import hscroll from '@/base_components/horizontal-scroll.vue';
+import hscroll from '@/base_components/horizontal_scroll.vue';
+import songItem from '@/base_components/song_item.vue';
 export default {
     data() {
         return {
@@ -98,7 +102,8 @@ export default {
         mheader,
         tab,
         banner,
-        hscroll
+        hscroll,
+        songItem
     },
     created() {
         this.getBannerData();

@@ -23,6 +23,16 @@ export default {
         scrollX:{
             type:Boolean,
             default:true
+        },
+        data:{
+            type:Array,
+            default:()=>{
+                return []
+            }
+        },
+        childrenDept:{
+            type:String,
+            default:0
         }
     },
     mounted() {
@@ -37,6 +47,13 @@ export default {
         },
         _initWidth(){
             let width = 0;
+            // if (childrenDept) {
+                
+            // }
+            // console.log(this.$refs.hSliderContent.length);
+            console.log(this.$refs.hSliderContent);
+            console.log(this.$refs.hSliderContent.$refs.song);
+            return;
             this.children = this.$refs.hSliderContent.children;
             console.log(this.children);
             width = this.children[0].clientWidth * this.children.length + (10*(this.children.length));
@@ -53,6 +70,12 @@ export default {
             })
         },
     },
+    watch: {
+        data(){
+            // this.initScrollY();
+            console.log('data数据变化');
+        }
+    },
 }
 </script>
 <style lang="scss" scoped>
@@ -60,31 +83,5 @@ export default {
         position: relative;
         width: 100%;
         overflow: hidden;
-        &-content{
-            .item{
-                width: 2rem;
-                height: 2.6rem;
-                margin-bottom: 0.2rem;
-                margin-right: 0.2rem;
-                // background: chocolate;
-                float: left;
-                box-sizing: border-box;
-                &:last-child{
-                    margin-right: 0rem;
-                }
-                img{
-                    width: 100%;
-                    border: 1px solid #eee;
-                    border-radius: 0.2rem;
-                }
-                h4{
-                    font-size: 0.20rem;
-                    color: #666;
-                    overflow: hidden;//隐藏文字
-                    text-overflow: ellipsis;//显示...
-                    white-space: nowrap; //不换行
-                }
-            }
-        }
     }
 </style>

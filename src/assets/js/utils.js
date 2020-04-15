@@ -1,5 +1,5 @@
 export const set_localStorage = (key, value)=>{
-    if(!name){
+    if(!key){
         console.error('请传入localStoage的key');
         return
     }

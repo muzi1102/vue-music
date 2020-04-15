@@ -5,7 +5,9 @@ const PLAY_KEY = '__play__';
 
 const FAVORITE_KEY = '__favorite__';
 
-const TAG_KEY ='__tag__';
+const MYTAG_KEY ='__mytag__';
+
+const TAG_KEY = '__tag__';
 
 
 export function loadFavorite() {
@@ -19,20 +21,28 @@ export function saveFavorite(song) {
 export function deleteFavorite(song) {
     return song
 }
-export function loadTag (){
-    let songs = get_localStorage(TAG_KEY) || [];
+export function loadMyTag (){
+    let songs = get_localStorage(MYTAG_KEY) || [];
     return songs;
 };
 
-export function saveTag(tag){
+export function loadTag() {
+    let songs = get_localStorage(TAG_KEY)||[];
+    return songs;
+}
+
+export function saveMyTag(tag){
     // let songs =  get_localStorage(TAG_KEY) || [];
     // insertArray(songs,tag,()=>{
     //     return item === tag;
     // })
-    set_localStorage(TAG_KEY,tag);
+    set_localStorage(MYTAG_KEY,tag);
     // return songs;
 };
 
+export function saveTag(tag) {
+    set_localStorage(TAG_KEY,tag);
+}
 
 function insertArray(arr, val, compare){
     const index = arr.findIndex(compare);
