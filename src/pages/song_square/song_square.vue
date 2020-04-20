@@ -26,7 +26,7 @@ import hscroll from '@/base_components/horizontal_scroll.vue';
 import songItem from '@/base_components/song_item.vue';
 import songTag from './song_tag/song_tag.vue';
 import {mapGetters} from 'vuex';
-import 'swiper/css/swiper.css';
+// import 'swiper/css/swiper.css';
 // import { swiper, swiperSlide } from 'vue-awesome-swiper'
 export default {
     data() {

@@ -6,11 +6,11 @@
             <form class="search-form">
                 <div class="search-form-cover">
                     <i class="iconfont search icon-search"></i>
-                    <input type="text" v-model="keyword" @keyup.space="suggestInfo" @keyup.enter="searchEnter">
+                    <input type="text" v-model="keyword" @input="suggestInfo" @keyup.enter="searchEnter">
                     <span v-show="keyword" @click="clear" class="close"><i class="iconfont icon icon-close"></i></span>
                 </div>
             </form>
-            <div class="search-pannel" v-if="keyword">
+            <div class="search-pannel">
                 <!-- 热门搜索 -->
                 <div class="search-pannel-hotlist">
                     <h5>热门搜索</h5>
