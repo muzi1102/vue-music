@@ -10,6 +10,7 @@
                     <span v-show="keyword" @click="clear" class="close"><i class="iconfont icon icon-close"></i></span>
                 </div>
             </form>
+            <!-- 默认 -->
             <div class="search-pannel">
                 <!-- 热门搜索 -->
                 <div class="search-pannel-hotlist">
@@ -20,17 +21,36 @@
                         </li>
                     </ul>
                 </div>
-                <div class="match-list">
-                    <searchItem :cellData = historykwList iconType="history" iconFtType="close"></searchItem>
-                </div>
                 <!-- 搜索历史 -->
                 <div class="search-pannel-history">
-                    
+                    <searchItem :cellData = historykwList iconType="history" iconFtType="close"></searchItem>
                 </div>
             </div>
+            <!-- 搜索建议 -->
             <div class="search-suggest" v-if="suggestList.length && keyword">
                 <searchItem @itemEvent=itemEvent :cellData = suggestList iconType="search"></searchItem>
             </div>
+            <!-- 搜索匹配 -->
+            <div class="searchresult">
+                <div class="match-list">
+                    <h3 class="title">最佳匹配</h3>
+                    <ul >
+                        <li class="matchitem artist" v-for="item in matchList" :key="item.name">
+                            <router-link tag="a" class="linkcover" :to="{name:'singerdetail',params:{ id: 123 }}">
+                                <figure class="piccover">
+                                    <img class="pic" :src="item.picUrl" :alt="item.name" srcset="">
+                                </figure>
+                                <article class="describe">歌手:{{item.name}}</article>
+                                <i class="iconfont icon-bofang"></i>
+                            </router-link>
+                        </li>
+                    </ul>
+                </div>
+                <section class="songlist">
+                    <searchItem @itemEvent=itemEvent :cellData = matchSongList iconType="play"></searchItem>
+                </section>
+            </div>
+            
         </div>
     </div>
 </template>
@@ -40,7 +60,7 @@ import tab from '@/components/tab.vue';
 import searchItem from '@/components/search_item.vue';
 import loading from '@/components/loading';
 import {mapGetters,mapActions} from 'vuex';
-import {set_localStorage,get_localStorage,remove_localStorage} from '@/assets/js/utils.js';
+import {set_localStorage,get_localStorage,remove_localStorage,debounce} from '@/assets/js/utils.js';
 export default {
     data() {
         return {
@@ -49,7 +69,8 @@ export default {
             matchAlbum:[],
             matchSongList:[],
             historykwList:[],
-            suggestList:[]
+            suggestList:[],
+            matchList:[]
         }
     },
     computed: {
@@ -74,26 +95,32 @@ export default {
         this.getHotList();
         this.historykwList = get_localStorage('search_history');
     },
+    mounted() {
+    },
     methods: {
         itemEvent(val){
             this.keyword = val.keyword;
             this.suggestList = [];
             this.search(val)
         },
-        suggestInfo(){
-            // 空格键的搜索
-             this.$get({
+        //为什么传this.aa的不行 
+        // 为什么这里不能立刻获取keywords?????这里有问题
+        suggestInfo:debounce(function () {
+            if (!this.keyword) {
+                return false;
+            }
+            this.$get({
                 url:'/api/search/suggest?type=mobile',
-                // loading:true,
                 data:{
                     keywords:this.keyword
                 }
             }).then((res)=>{
+                this.suggestList = [];
                 res.result && res.result.allMatch.map((item)=>{
                     this.suggestList.push(item.keyword)
                 });
-            })
-        },
+            }) 
+        }),
         clear(){
             this.suggestList = [];
             this.keyword = '';
@@ -137,7 +164,8 @@ export default {
                 url:'/api/search/get',
                 loading:true,
                 data:{
-                    keywords:this.keyword||val.keyword
+                    keywords:this.keyword||val.keyword,
+                    limit:10
                 }
             }).then((res)=>{
                 this.matchSongList = res.result.songs;
@@ -151,7 +179,7 @@ export default {
                     keywords:this.keyword||val.keyword
                 }
             }).then((res)=>{
-                // this.matchSongList = res.result.songs;
+                this.matchList = res.result.artist || [];
             })
         },
         ...mapActions({
@@ -218,4 +246,49 @@ export default {
         @include border(#d3d4da,0.64rem);
     }
 }
+.search-suggest{
+    position: absolute;
+    top: 1rem;
+    background: #fff;
+    right: 0;
+    left: 0;
+}
+.match-list{
+    .title{
+        margin-left: 0.2rem;
+        font-size: 0.24rem;
+        line-height: 0.32rem;
+        color: #666;
+    }
+    .matchitem{
+        position: relative;
+        height: 1.32rem;
+        .linkcover{
+            display: flex;
+            -webkit-box-align: center;
+            -webkit-align-items: center;
+            -ms-flex-align: center;
+            align-items: center;
+            height: 1.32rem;
+            margin-left: 0.2rem;
+            padding: 8px 10px 8px 0;
+            box-sizing: border-box;
+            .piccover{
+                position: relative;
+                width: 1rem;
+                height: 1rem;
+                margin-right: 0.3rem;
+                line-height: 0;
+                .pic{
+                    display: block;
+                    width: 100%;
+                }
+            }
+            .describe{
+                flex: 1;
+            }
+        }
+    }
+}
+
 </style>

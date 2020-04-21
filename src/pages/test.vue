@@ -1,5 +1,7 @@
 <template>
     <div>
+        <input type='text' v-model='value' @keydown = "hangleChange">
+        <button @click="test">点击我</button>
         <!-- <button @click="addCart">加入购物车</button>
         <div class="card" id="buycar">
             我是购物车
@@ -22,7 +24,7 @@
             >
             </li>
         </ul> -->
-         <transition-group>
+         <!-- <transition-group>
             <li v-for="(item,index) in size"
                 class="item"
                 :class="[`item-${index}`]"
@@ -30,14 +32,25 @@
                 :style="{'top':item.top+'px','left':item.left+'px','width':item.width+'px','height':item.height+'px','zIndex':item.zIndex,'opacity':item.opacity}"
             >
             </li>
-        </transition-group>
+        </transition-group> -->
+        
     </div>
 </template>
 <script>
 let count = 0;
+function debounce(func, wait=1000){ //可以放入项目中的公共方法中进行调用（鹅只是省事）
+    let timeout;
+    return function(event){
+        clearTimeout(timeout)
+        timeout = setTimeout(()=>{
+            func.call(this, event)
+        },wait)
+    }
+}
 export default {
     data() {
         return {
+            value:'',
             myArr : [],          
             size:[
                 // {"top":60,"left":0,"width":10,"height":100,"zIndex":1,"opacity":0,"background":'red'},
@@ -54,51 +67,43 @@ export default {
         }
     },
     mounted() {
-        this.auto();
+        // this.auto();
     },
-    methods: {
-        // classObjc(item){
-        //     return {
-
-        //     }
-        // },
-        bundleClick : function () {
-            this.myArr.push({
-                id :  count++ ,
-                content : "我有" + count + "个梦想"
-            })
-            
-        },
-        auto(){
-            setInterval(() => {
-                this.size.unshift(this.size.pop());
-                console.log(this.size);
-            }, 2000);
-        },
-        addCart(){
-            this.elLeft = event.target.getBoundingClientRect().left;
-            this.elTop = event.target.getBoundingClientRect().top;
-            this.showMoveDot = [...this.showMoveDot, true];
-        },
-        beforeEnter(el){
-            // 设置transform值
-            el.style.transform = `translate3d(${this.elLeft - 30}px,${this.elTop - 100}px , 0)`;
-            // 设置透明度
-            el.style.opacity = 0;
-        },
-        afterEnter(el){
-            const badgePosition = document.getElementById("buycar").getBoundingClientRect();
-            // 设置位移
-            el.style.transform = `translate3d(${badgePosition.left + 30}px,${badgePosition.top - 30}px,0)`
-            // 增加贝塞尔曲线  
-            el.style.transition = 'transform .88s cubic-bezier(0.3, -0.25, 0.7, -0.15)';
-            el.style.transition = 'transform .88s linear';
-            this.showMoveDot = this.showMoveDot.map(item => false);
-            // 设置透明度
-            el.style.opacity = 1;
-            // 监听小球动画结束方法
+    methods: {  
+        hangleChange:debounce(function(e){console.log(this.value)}),
+        test:function() {
+            console.log('饿哦执行')
         }
-    },
+        // auto(){
+        //     setInterval(() => {
+        //         this.size.unshift(this.size.pop());
+        //         console.log(this.size);
+        //     }, 2000);
+        // },
+        // addCart(){
+        //     this.elLeft = event.target.getBoundingClientRect().left;
+        //     this.elTop = event.target.getBoundingClientRect().top;
+        //     this.showMoveDot = [...this.showMoveDot, true];
+        // },
+        // beforeEnter(el){
+        //     // 设置transform值
+        //     el.style.transform = `translate3d(${this.elLeft - 30}px,${this.elTop - 100}px , 0)`;
+        //     // 设置透明度
+        //     el.style.opacity = 0;
+        // },
+        // afterEnter(el){
+        //     const badgePosition = document.getElementById("buycar").getBoundingClientRect();
+        //     // 设置位移
+        //     el.style.transform = `translate3d(${badgePosition.left + 30}px,${badgePosition.top - 30}px,0)`
+        //     // 增加贝塞尔曲线  
+        //     el.style.transition = 'transform .88s cubic-bezier(0.3, -0.25, 0.7, -0.15)';
+        //     el.style.transition = 'transform .88s linear';
+        //     this.showMoveDot = this.showMoveDot.map(item => false);
+        //     // 设置透明度
+        //     el.style.opacity = 1;
+        //     // 监听小球动画结束方法
+        // }
+    }
 }
 </script>
 <style lang="scss" scoped>

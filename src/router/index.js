@@ -8,7 +8,7 @@ import search from '@/pages/search';
 import singer from '@/pages/singer';
 import rankDetail from '@/pages/rank_detail';
 import squareSong from '@/pages/song_square/song_square.vue';
-//import tag from '@/pages/song_tag/song_tag';
+import singerDetail from '@/pages/singer_detail.vue';
 import test from '@/pages/test.vue';
 
 Vue.use(Router)
@@ -48,6 +48,11 @@ export default new Router({
       path: '/singer',
       name: 'singer',
       component: singer
+    },
+    {
+        path: '/singerdetail',
+        name: 'singerdetail',
+        component: singerDetail
     },
     {
         path:'/square',

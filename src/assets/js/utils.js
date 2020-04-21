@@ -30,3 +30,16 @@ export const shuffle = (arr)=>{
     }
     return _arr;
 }
+
+export const debounce = (fn,wait=1000)=>{
+    let timer = null;
+    console.log(fn);
+    return function () {
+        let context = this;
+        let args = arguments;
+        clearTimeout(timer);
+        timer = setTimeout(() => {
+            fn.apply(context, args);
+        }, wait);
+    }
+}

@@ -1,19 +1,27 @@
 <template>
 <div>
-    <div class="cell" 
-        v-for="(cell,index) in cellData"
-        :key="index"
-        @click="itemEvent(cell)">
-        <div class="cell-hd" v-if="iconType">
-            <i :class=iconClassObject></i>
-        </div>
-        <div class="cell-r">
-            <div class="cell-bd">{{cell}}</div>
-            <div class="cell-ft" @click="bindEvent">
-                <i :class=iconFtClassObject></i>
+    <template v-if="cellData && cellData.length">
+        <div class="cell" 
+            v-for="(cell,index) in cellData"
+            :key="index"
+            @click="itemEvent(cell)">
+            <div class="cell-hd" v-if="iconType">
+                <i :class=iconClassObject></i>
+            </div>
+            <div class="cell-r">
+                <div class="cell-bd">
+                    <div>{{cell}}</div>
+                    <slot name="content"></slot>
+                </div>
+                <div class="cell-ft" @click="bindEvent">
+                    <i :class=iconFtClassObject></i>
+                </div>
             </div>
         </div>
-    </div>
+    </template>
+    <template v-else>
+        <p v-if="noData">暂无数据</p>
+    </template>
 </div>
 </template>
 <script>
@@ -25,6 +33,11 @@ export default {
         }
     },
     props:{
+        // 是否需要展示暂无数据
+        noData:{
+            type:Boolean,
+            default:false
+        },
         cellData:{
             type:Array,
             default:()=>{
