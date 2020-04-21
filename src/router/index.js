@@ -50,7 +50,7 @@ export default new Router({
       component: singer
     },
     {
-        path: '/singerdetail',
+        path: '/singerdetail/:id',
         name: 'singerdetail',
         component: singerDetail
     },

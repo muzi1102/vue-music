@@ -23,12 +23,20 @@
                 </div>
                 <!-- 搜索历史 -->
                 <div class="search-pannel-history">
-                    <searchItem :cellData = historykwList iconType="history" iconFtType="close"></searchItem>
+                    <searchItem :cellData = historykwList iconType="history" iconFtType="close">
+                        <template v-slot:item="{ row }">
+                            <p>{{row}}</p>
+                        </template>
+                    </searchItem>
                 </div>
             </div>
             <!-- 搜索建议 -->
             <div class="search-suggest" v-if="suggestList.length && keyword">
-                <searchItem @itemEvent=itemEvent :cellData = suggestList iconType="search"></searchItem>
+                <searchItem @itemEvent=itemEvent :cellData = suggestList iconType="search">
+                    <template v-slot:item="{ row }">
+                        <p>{{row}}</p>
+                    </template>
+                </searchItem>
             </div>
             <!-- 搜索匹配 -->
             <div class="searchresult">
@@ -36,18 +44,37 @@
                     <h3 class="title">最佳匹配</h3>
                     <ul >
                         <li class="matchitem artist" v-for="item in matchList" :key="item.name">
-                            <router-link tag="a" class="linkcover" :to="{name:'singerdetail',params:{ id: 123 }}">
+                            <router-link
+                                v-for="list in item.lists"
+                                tag="a" class="linkcover" 
+                                :to="{name:'singerdetail',params:{ id: list.id }}"
+                            >
                                 <figure class="piccover">
-                                    <img class="pic" :src="item.picUrl" :alt="item.name" srcset="">
+                                    <img class="pic" :src="list.picUrl" :alt="list.name" srcset="">
                                 </figure>
-                                <article class="describe">歌手:{{item.name}}</article>
+                                <article class="describe">
+                                    {{item.title === 'artist'?'歌手':item.title === 'album'?'专辑':''}}
+                                    :
+                                    {{list.name}}
+                                </article>
                                 <i class="iconfont icon-bofang"></i>
                             </router-link>
                         </li>
                     </ul>
                 </div>
                 <section class="songlist">
-                    <searchItem @itemEvent=itemEvent :cellData = matchSongList iconType="play"></searchItem>
+                    <searchItem @itemEvent=itemEvent :cellData = matchSongList iconFtType="play">
+                        <template v-slot:item="{ row }">
+                            <div>
+                                <p>{{row.name}}</p>
+                                <p>
+                                    <span>{{row.artists[0].name}}</span>
+                                    --
+                                    <span>{{row.album.name}}</span>
+                                </p>
+                            </div>
+                        </template>
+                    </searchItem>
                 </section>
             </div>
             
@@ -179,7 +206,18 @@ export default {
                     keywords:this.keyword||val.keyword
                 }
             }).then((res)=>{
-                this.matchList = res.result.artist || [];
+                let result = res.result;
+                let orders = result.orders;
+                if(orders.length>0){
+                    orders.forEach((item)=>{
+                        let data = {
+                            title:item,
+                            lists:result[item]||[]
+                        }
+                        this.matchList.push(data);
+                        console.log(this.matchList)
+                    });
+                }
             })
         },
         ...mapActions({

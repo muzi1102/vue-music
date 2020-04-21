@@ -1,6 +1,22 @@
 <template>
 <div>
-    <template v-if="cellData && cellData.length">
+    <div class="cell" 
+        v-for="(cell,index) in cellData"
+        :key="index"
+        @click="itemEvent(cell)">
+        <div class="cell-hd" v-if="iconType">
+            <i :class=iconClassObject></i>
+        </div>
+        <div class="cell-r">
+            <div class="cell-bd">
+                <slot name="item" :row="cell"></slot>
+            </div>
+            <div class="cell-ft" @click="bindEvent">
+                <i :class=iconFtClassObject></i>
+            </div>
+        </div>
+    </div>
+    <!-- <template v-if="cellData && cellData.length">
         <div class="cell" 
             v-for="(cell,index) in cellData"
             :key="index"
@@ -21,7 +37,7 @@
     </template>
     <template v-else>
         <p v-if="noData">暂无数据</p>
-    </template>
+    </template> -->
 </div>
 </template>
 <script>
@@ -30,6 +46,11 @@ export default {
         // vue的这里为什么是return
         return {
 
+        }
+    },
+    watch: {
+        cellData(){
+            console.log(this.cellData)
         }
     },
     props:{
@@ -70,6 +91,9 @@ export default {
                 'icon':true
             }
         }
+    },
+    created() {
+        console.log(this.cellData)
     },
     methods: {
         bindEvent(){
