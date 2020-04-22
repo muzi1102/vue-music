@@ -47,10 +47,14 @@
                             <router-link
                                 v-for="list in item.lists"
                                 tag="a" class="linkcover" 
-                                :to="{name:'singerdetail',params:{ id: list.id }}"
+                                :to="{name:item.title,params:{ id: list.id }}"
+                                :key="list.id"
                             >
                                 <figure class="piccover">
-                                    <img class="pic" :src="list.picUrl" :alt="list.name" srcset="">
+                                    <img class="pic" 
+                                        :src="list.picUrl"
+                                        :alt="list.name"
+                                    >
                                 </figure>
                                 <article class="describe">
                                     {{item.title === 'artist'?'歌手':item.title === 'album'?'专辑':''}}
@@ -84,7 +88,6 @@
 <script>
 import mheader from '@/components/header.vue';
 import tab from '@/components/tab.vue';
-import searchItem from '@/components/search_item.vue';
 import loading from '@/components/loading';
 import {mapGetters,mapActions} from 'vuex';
 import {set_localStorage,get_localStorage,remove_localStorage,debounce} from '@/assets/js/utils.js';
@@ -108,8 +111,7 @@ export default {
     components:{
         mheader,
         tab,
-        loading,
-        searchItem
+        loading
     },
     watch: {
         'keyword'(val){
@@ -208,17 +210,19 @@ export default {
             }).then((res)=>{
                 let result = res.result;
                 let orders = result.orders;
+                this.matchList= [];
                 if(orders.length>0){
                     orders.forEach((item)=>{
-                        let data = {
-                            title:item,
-                            lists:result[item]||[]
+                        if (['artist','album'].indexOf(item)>-1) {
+                            let data = {
+                                title:item,
+                                lists:result[item]||[]
+                            }
+                            this.matchList.push(data);
                         }
-                        this.matchList.push(data);
-                        console.log(this.matchList)
                     });
                 }
-            })
+            });
         },
         ...mapActions({
             addCount:'incrementAsync'

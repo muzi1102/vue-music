@@ -8,7 +8,8 @@ import search from '@/pages/search';
 import singer from '@/pages/singer';
 import rankDetail from '@/pages/rank_detail';
 import squareSong from '@/pages/song_square/song_square.vue';
-import singerDetail from '@/pages/singer_detail.vue';
+import artist from '@/pages/artist.vue';
+import album from '@/pages/album.vue';
 import test from '@/pages/test.vue';
 
 Vue.use(Router)
@@ -49,10 +50,16 @@ export default new Router({
       name: 'singer',
       component: singer
     },
+    // params和query的写法有什么区别
     {
-        path: '/singerdetail/:id',
-        name: 'singerdetail',
-        component: singerDetail
+        path: '/artist/:id',
+        name: 'artist',
+        component: artist
+    },
+    {
+        path: '/album/:id',
+        name: 'album',
+        component: album 
     },
     {
         path:'/square',
