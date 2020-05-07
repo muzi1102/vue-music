@@ -16,7 +16,7 @@
     (5)axios请求的封装
 
     (6)create和mounted 的区别为什么document.getElementsByTagName('html')[0]这个在created里面也可以获取
-    (7)test jenkines
+    (7)test jenkines111
 
 ``` bash
 # install dependencies
