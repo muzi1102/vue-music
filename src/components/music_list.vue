@@ -1,18 +1,18 @@
 <template>
     <div class="music-list">
         <div class="back" @click="back">
-            <i class="iconfont icon-back"><</i>
+            <i class="iconfont icon-fanhui"></i>
         </div>
         <h4 class="title">{{title}}</h4>
         <div class="bg-image" :style="bgStyle" ref="bgImage">
-            <div class="play-wrapper">
+            <!-- <div class="play-wrapper">
               <div ref="playBtn" class="play" @click="random">
                 <i class="icon-play"></i>
                 <span class="text">随机播放全部</span>
               </div>
-            </div>
+            </div> -->
         </div>
-        <scroll 
+        <!-- <scroll 
             :data="songs"
             @scroll="scroll"
             :listenScroll="true"
@@ -24,7 +24,10 @@
             <div class="song-list-wrapper">
                 <songList :songs="songs"  @select="selectItem"></songList>
             </div>
-        </scroll>
+        </scroll> -->
+        <div class="song-list-wrapper">
+            <songList :songs="songs"  @select="selectItem"></songList>
+        </div>
     </div>
 </template>
 <script>
@@ -66,7 +69,7 @@ export default {
     mounted() {
         // why
         this.imageHeight = this.$refs.bgImage.clientHeight;
-        this.$refs.list.$el.style.top = `${this.imageHeight}px`
+        // this.$refs.list.$el.style.top = `${this.imageHeight}px`
     },
     methods: {
         scroll(){
@@ -101,6 +104,10 @@ export default {
     bottom: 0;
     right: 0;
     background-color: #F2F3F4;
+    .back{
+        // background-color: #fff;
+        line-height: 0.8rem;
+    }
     .title{
         position: absolute;
         top:0;

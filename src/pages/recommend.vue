@@ -1,19 +1,20 @@
 <template>
     <div>
-        <mheader></mheader>
-        <tab></tab>
         <div class="banner" v-if="bannerList.length>0">
-            <!-- <banner>
+            <!-- todo初始化的时候一闪而过 -->
+            <banner>
                 <div v-for="(item,index) in bannerList" :key="index">
                     <a :href="item.url">
                         <img :src="item.pic" alt="">
                     </a>
                 </div>
-            </banner> -->
+            </banner>
         </div>
         <ul class="nav-tab">
-            <li v-for="item in navItem">
-                <i class="iconfont" :class="[`icon-${item.icon}`]"></i>
+            <li class="nav-tab-item" v-for="item in navItem" :key="item.id">
+                <div class='tab-icon'>
+                    <i class="iconfont" :class="[`icon-${item.icon}`]"></i>
+                </div>
                 <h4>{{item.name}}</h4>
             </li>
         </ul>
@@ -23,43 +24,55 @@
                 <span @click="getMoreInfo">查看更多</span>
             </div>
             <div class="recommend-slider-group">
-                <hscroll childrenDept=2>
+                <hscroll @initWidth = initWidth ref="hscroll">
                     <!-- todo 歌单的播放量 -->
-                    <!-- <li class="item" v-for="item in songList" :key="item.id">
-                        <img :src="item.picUrl" alt="">
-                        <h4>{{item.name}}</h4>
-                    </li> -->
-                    <song-item :list="songList"></song-item>
+                    <li class="song-item" v-for="item in songList" :key="item.id"  @click="goDetail(item)">
+                        <img class="song-img" :src="item.picUrl" alt="">
+                        <p class="song-title">{{item.name}}</p>
+                        <p class="song-play">
+                            <i class="iconfont icon-bofang1 song-play-icon"></i>
+                            <span class="song-play-num">{{item.playCount|chineseUnit}}</span>
+                        </p>
+                    </li>
+                    <!-- 这里有问题 -->
+                    <!-- <song-item :list="songList" ref="songItem"></song-item> -->
                 </hscroll>
             </div>
         </div>
         <div class="recommend-new">
             <div class="title">
-                <h4>推荐新音乐</h4>
+                <h4>为你精挑细选</h4>
                 <span @click="getMoreInfo">查看更多</span>
             </div>
             <div class="recommend-new-group">
-                <hscroll childrenDept=2>
-                    <!-- <li class="item" v-for="item in newSongList" :key="item.id">
-                        <img :src="item.picUrl" alt="">
-                        <h4>{{item.name}}</h4>
-                    </li> -->
-                    <song-item :list="newSongList"></song-item>
+                <hscroll @initWidth = initWidth ref="hscroll">
+                    <!-- <song-item :list="newSongList" ref="songItem"></song-item> -->
+                    <li class="song-item" v-for="item in newSongList" :key="item.id" @click="goDetail(item)">
+                        <img class="song-img" :src="item.picUrl" alt="">
+                        <p class="song-title">{{item.name}}</p>
+                        <p class="song-play">
+                            <i class="iconfont icon-bofang1 song-play-icon"></i>
+                            <span class="song-play-num">{{item.playCount|chineseUnit}}</span>
+                        </p>
+                    </li>
                 </hscroll>
             </div>
         </div>
         <div class="recommend-dj">
             <div class="title">
-                <h4>推荐电台</h4>
+                <h4>为你精挑细选</h4>
                 <span @click="getMoreInfo">查看更多</span>
             </div>
             <div class="recommend-dj-group">
-                <hscroll childrenDept=2>
-                    <!-- <li class="item" v-for="item in djData" :key="item.id">
-                        <img :src="item.picUrl" alt="">
-                        <h4>{{item.name}}</h4>
-                    </li> -->
-                    <song-item :list="djData"></song-item>
+                <hscroll @initWidth = initWidth ref="hscroll"> 
+                    <li class="song-item" v-for="item in djData" :key="item.id" @click="goDetail(item)">
+                        <img class="song-img" :src="item.picUrl" alt="">
+                        <p class="song-title">{{item.name}}</p>
+                        <p class="song-play">
+                            <i class="iconfont icon-bofang1 song-play-icon"></i>
+                            <span class="song-play-num">{{item.playCount|chineseUnit}}</span>
+                        </p>
+                    </li>
                 </hscroll>
             </div>
         </div>
@@ -67,8 +80,6 @@
     </div>
 </template>
 <script>
-import mheader from '@/components/header.vue';
-import tab from '@/components/tab.vue';
 import banner from '@/base_components/banner.vue';
 import hscroll from '@/base_components/horizontal_scroll.vue';
 import songItem from '@/base_components/song_item.vue';
@@ -99,8 +110,6 @@ export default {
         }
     },
     components:{
-        mheader,
-        tab,
         banner,
         hscroll,
         songItem
@@ -112,6 +121,18 @@ export default {
         this.getNewSong();
     },
     methods: {
+        goDetail(item){
+            this.$router.push({
+                path: `/recommend/id/${item.id}`
+            })
+        },
+        initWidth(){
+            let width = 0;
+            this.children = this.$refs.songItem.$refs.song.children;
+            console.log(this.children[0].clientWidth)
+            width = this.children[0].clientWidth * this.children.length + (10*(this.children.length));
+            this.$refs.hscroll.$refs.hSliderContent.style.width = width + 'px';
+        },
         getMoreInfo(){
             this.$router.push({
                 path:'/square'
@@ -166,6 +187,19 @@ export default {
             })
         }
     },
+    filters:{
+        chineseUnit(num){
+            let numStr = '';
+            if (num<10000) {
+                numStr = num;
+            }else if(num>=10000 && num < 100000000){
+                numStr = (num/10000) + '万';
+            }else if(num >= 100000000){
+                numStr = num / 100000000 + '亿';
+            }
+            return numStr
+        }
+    }
 }
 </script>
 <style scoped lang="scss">
@@ -230,14 +264,69 @@ export default {
     display: flex;
     align-items: center;
     padding: 0 0.2rem;
-    height: 1rem;
-    background-color: cyan;
-    li{
+    &-item{
         flex:1;
         text-align:center;
+        .tab-icon{
+            width: 0.8rem;
+            height: 0.8rem;
+            // todo渐变
+            background-color:#d44439;
+            // opacity: 0.8;
+            border-radius: 50%;
+            margin: auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            .iconfont{
+                font-size: 0.44rem;
+                color: #fff;
+            }
+        }
+        h4{
+            margin-top: 0.2rem;
+        }
     }
-    .iconnfont{
-        font-size: 0.5rem;
+    
+    
+}
+.song-item{
+    width: 2rem;
+    height: 2.6rem;
+    margin-bottom: 0.2rem;
+    margin-right: 0.2rem;
+    // background: chocolate;
+    float: left;
+    box-sizing: border-box;
+    position: relative;
+    &:last-child{
+        margin-right: 0rem;
+    }
+    .song-img{
+        width: 100%;
+        border: 1px solid #eee;
+        border-radius: 0.2rem;
+    }
+    .song-title{
+        font-size: 0.20rem;
+        color: #666;
+        overflow: hidden;//隐藏文字
+        text-overflow: ellipsis;//显示...
+        white-space: nowrap; //不换行
+    }
+    .song-play{
+        position: absolute;
+        top:0;
+        right: 0.1rem;
+        color: #fff;
+        &-play{
+            font-size: 0.22rem;
+            vertical-align: middle;
+        }
+        &-icon{
+            font-size: 0.22rem;
+            vertical-align: middle;
+        }
     }
 }
 </style>

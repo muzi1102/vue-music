@@ -29,10 +29,6 @@ export default {
             default:()=>{
                 return []
             }
-        },
-        childrenDept:{
-            type:String,
-            default:0
         }
     },
     mounted() {
@@ -42,20 +38,17 @@ export default {
     },
     methods: {
         initScrollY(){
-            this._initWidth();
+            // 如果存在this.$children就在应用组件的文件自行处理
+            if (this.$children.length > 0) {
+                this.$emit('initWidth');
+            }else{
+                this._initWidth();
+            }
             this._initSlider();
         },
         _initWidth(){
             let width = 0;
-            // if (childrenDept) {
-                
-            // }
-            // console.log(this.$refs.hSliderContent.length);
-            console.log(this.$refs.hSliderContent);
-            console.log(this.$refs.hSliderContent.$refs.song);
-            return;
             this.children = this.$refs.hSliderContent.children;
-            console.log(this.children);
             width = this.children[0].clientWidth * this.children.length + (10*(this.children.length));
             this.$refs.hSliderContent.style.width = width + 'px';
         },

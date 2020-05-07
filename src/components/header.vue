@@ -1,7 +1,7 @@
 <template>
     <div class="header">
         <i class="header-logo"></i>
-        <h3 class="header-name">guys music</h3>
+        <h3 class="header-name">音乐的力量</h3>
         <div class="header-user"></div>
     </div>
 </template>

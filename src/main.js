@@ -17,6 +17,8 @@ import mheader from '@/base_components/header.vue'
 Vue.component('mheader',mheader);
 import searchItem from '@/components/search_item.vue';
 Vue.component('searchItem',searchItem);
+import scroll from '@/base_components/scroll.vue';
+Vue.component('scroll',scroll);
 /* eslint-disable no-new */
 new Vue({
   el: '#app',

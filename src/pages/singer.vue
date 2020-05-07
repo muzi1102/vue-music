@@ -1,7 +1,5 @@
 <template>
     <div>
-        <mheader></mheader>
-        <tab></tab>
         <div class="header-placeholder wrapper" ref="wrapper">
             <ul class="scroll-container content" >
                 <li v-for="(item,index) in singer" class="singer-group" ref="singerGroup" :key="index">
@@ -27,8 +25,6 @@
 </template>
 <script>
 import pinyin from "pinyin";
-import mheader from '@/components/header.vue';
-import tab from '@/components/tab.vue';
 import BScroll from 'better-scroll'
 // todo 滑动shortCut改变位置 过渡状态
 export default {
@@ -43,8 +39,6 @@ export default {
         }
     },
     components:{
-        mheader,
-        tab
     },
     created() {
         this.getSinger();

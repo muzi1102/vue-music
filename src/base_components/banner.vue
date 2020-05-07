@@ -37,8 +37,8 @@ export default {
     },
     mounted() {
         setTimeout(() => {
-            this._initDots();
             this.setSliderWidth();
+            this._initDots();
             this.initSlider();
             if (this.autoPlay) {
                 this._play();
@@ -116,6 +116,25 @@ export default {
                 display: block;
                 width: 100%;
             }
+        }
+    }
+}
+.dots{
+    position: absolute;
+    right: 0;
+    left: 0;
+    bottom: 12px;
+    text-align: center;
+    font-size: 0;
+    .dot{
+        display: inline-block;
+        margin: 0 0.08rem;
+        width: 0.16rem;
+        height: 0.16rem;
+        border-radius: 50%;
+        background: hsla(0,0%,100%,.5);
+        &.active{
+           background-color: #d44439;
         }
     }
 }

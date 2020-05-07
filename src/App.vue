@@ -1,5 +1,7 @@
 <template>
   <div id="app">
+    <mheader></mheader>
+    <tab></tab>
     <transition>
       <router-view/>
     </transition>
@@ -9,11 +11,15 @@
 </template>
 
 <script>
+import mheader from '@/components/header.vue';
+import tab from '@/components/tab.vue';
 import Player from '@/components/player';
 export default {
   name: 'App',
   components:{
-    Player
+    Player,
+    mheader,
+    tab
   }
 }
 </script>

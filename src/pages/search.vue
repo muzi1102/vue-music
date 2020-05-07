@@ -1,7 +1,5 @@
 <template>
     <div>
-        <mheader></mheader>
-        <tab></tab>
         <div class="search header-placeholder">
             <form class="search-form">
                 <div class="search-form-cover">
@@ -86,8 +84,6 @@
     </div>
 </template>
 <script>
-import mheader from '@/components/header.vue';
-import tab from '@/components/tab.vue';
 import loading from '@/components/loading';
 import {mapGetters,mapActions} from 'vuex';
 import {set_localStorage,get_localStorage,remove_localStorage,debounce} from '@/assets/js/utils.js';
@@ -109,8 +105,6 @@ export default {
         ])
     },
     components:{
-        mheader,
-        tab,
         loading
     },
     watch: {

@@ -1,7 +1,5 @@
 <template>
     <div>
-        <mheader></mheader>
-        <tab></tab>
         <div class="header-placeholder wrapper" >
             <scroll ref="wrapper" :data="musicRankList">
                 <ul class="content">
@@ -22,9 +20,6 @@
     </div>
 </template>
 <script>
-import scroll from '@/base_components/scroll.vue';
-import mheader from '@/components/header.vue';
-import tab from '@/components/tab.vue';
 import BScroll from 'better-scroll';
 import {mapActions} from 'vuex'
 const MUSIC_RANK = [1, 2, 3, 4, 5, 6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,24,24,25,26,27,28,29,30];
@@ -40,16 +35,16 @@ export default {
         }
     },
     components:{
-        mheader,
-        tab,
-        scroll
     },
     created() {
         start = 0;
+        this.getData();
     },
     mounted() {
-        this._initScroll();
-        this.getData();
+        setTimeout(() => {
+           this._initScroll(); 
+        }, 20);
+        
     },
     methods: {
         _initScroll(){
@@ -72,8 +67,9 @@ export default {
                     }
                     this.getData();
                     this.scrollInstance.finishPullUp();
-              })
-            })
+                })
+            });
+            
         },
         getData(){
             const urls = MUSIC_RANK.slice(start,count+start);

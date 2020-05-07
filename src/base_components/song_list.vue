@@ -1,5 +1,9 @@
 <template>
     <div class="song-list">
+        <div class="sequence-play">
+            <i class="iconfont icon-bofang1"></i>
+            <span>播放全部</span>
+        </div>
         <ul>
             <li @click="selectItem(song, index)"  class="item" v-for="(song, index) in songs" :key="index">
                 <p class="order">{{index+1}}</p>
@@ -37,6 +41,23 @@ export default {
 
 <style lang="scss" scoped>
     .song-list{
+        border-radius: .2rem;
+        position: relative;
+        padding-top: 0.8rem;
+        background: #f2f3f4;
+        top: -0.4rem;
+        .sequence-play{
+            position: absolute;
+            top: 0;
+            display: -ms-flexbox;
+            display: flex;
+            -ms-flex-align: center;
+            align-items: center;
+            width: 100%;
+            height: 0.8rem;
+            padding-left: 0.32rem;
+            border-bottom: 1px solid #e4e4e4;
+        }
         .item{
             display: flex;
             align-items: center;
