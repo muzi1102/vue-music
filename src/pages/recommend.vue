@@ -41,7 +41,7 @@
         </div>
         <div class="recommend-new">
             <div class="title">
-                <h4>为你精挑细选</h4>
+                <h4>为你精挑细选ba</h4>
                 <span @click="getMoreInfo">查看更多</span>
             </div>
             <div class="recommend-new-group">
