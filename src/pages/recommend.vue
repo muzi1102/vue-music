@@ -77,6 +77,7 @@
             </div>
         </div>
         <router-view></router-view>
+        <spinner type="snake"></spinner>
     </div>
 </template>
 <script>

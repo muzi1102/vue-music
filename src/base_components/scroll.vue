@@ -35,12 +35,13 @@ export default {
         }
     },
     mounted() {
-        this.$nextTick(()=>{
+        setTimeout(() => {
             this._initScroll();
-        });
+        }, 20);
     },
     methods: {
         _initScroll(){
+            debugger;
             if (!this.$refs.wrapper) {
                 return false;
             }

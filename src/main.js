@@ -19,6 +19,8 @@ import searchItem from '@/components/search_item.vue';
 Vue.component('searchItem',searchItem);
 import scroll from '@/base_components/scroll.vue';
 Vue.component('scroll',scroll);
+import spinner from '@/base_components/spinner/spinner.vue';
+Vue.component('spinner',spinner);
 /* eslint-disable no-new */
 new Vue({
   el: '#app',

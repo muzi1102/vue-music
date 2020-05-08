@@ -41,14 +41,15 @@ export default {
         this.getData();
     },
     mounted() {
-        setTimeout(() => {
-           this._initScroll(); 
-        }, 20);
+        // setTimeout(() => {
+        //    this._initScroll(); 
+        // }, 20);
         
     },
     methods: {
         _initScroll(){
-            this.$nextTick(()=>{
+            // this.$nextTick(()=>{
+                console.log(this.$refs.wrapper);
                 this.scrollInstance = new BScroll(this.$refs.wrapper,{
                     fade: true,
                     probeType:3,
@@ -68,7 +69,7 @@ export default {
                     this.getData();
                     this.scrollInstance.finishPullUp();
                 })
-            });
+            // });
             
         },
         getData(){
